@@ -3,10 +3,10 @@
 import React, { Children, createContext, useContext, useState } from "react";
 import themes from "./themes";
 
-export const GlobalContext = useContext();
-export const GlobalUpdateContext = useContext();
+export const GlobalContext = createContext();
+export const GlobalUpdateContext = createContext();
 
-export const GlobalProvider = ({ Children }) => {
+export const GlobalProvider = ({ children }) => {
   const [selectedTheme, setSelectedTheme] = useState(0);
   const theme = themes[selectedTheme];
 
@@ -16,7 +16,7 @@ export const GlobalProvider = ({ Children }) => {
         theme,
       }}
     >
-      <GlobalUpdateContext.Provider value={{}}>{Children}</GlobalUpdateContext.Provider>
+      <GlobalUpdateContext.Provider value={{theme}}>{children}</GlobalUpdateContext.Provider>
     </GlobalContext.Provider>
   );
 };
